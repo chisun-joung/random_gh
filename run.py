@@ -3,6 +3,7 @@ import random
 import time
 import os
 from dotenv import load_dotenv
+from termcolor import colored
 
 # Load variables from .env file
 load_dotenv()
@@ -23,11 +24,12 @@ while True:
         # Get a random file from the repository
         files = random_repo.get_contents("")
         random_file = random.choice(files)
-
+         # Choose a random color for each character
+        color = random.choice(['red', 'green', 'yellow', 'blue', 'magenta', 'cyan'])
         # Print the contents of the file character by character
         try :
-            for char in random_file.decoded_content.decode('utf-8'):
-                print(char, end='', flush=True)
+            for char in random_file.decoded_content.decode('utf-8'):    
+                print(colored(char, color), end='', flush=True)
                 time.sleep(0.01)  # pause for 0.1 seconds between characters
         except UnicodeDecodeError:
             pass
